@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using CosmoTrek_v3.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CosmoTrek_v3.Data
@@ -9,5 +10,8 @@ namespace CosmoTrek_v3.Data
             : base(options)
         {
         }
+
+        public DbSet<TrekPlan> TrekPlans { get; set; }
+        public DbSet<TrekReservation> TrekReservations { get; set; }
     }
 }
