@@ -15,9 +15,9 @@ namespace CosmoTrek_v3.Models
         [MaxLength(2)]
         public string State { get; set; }
         public short Zip { get; set; }
-        [Phone]
-        public string Phone { get; set; }
-        [EmailAddress]
-        public string Email { get; set; }
+
+        public SpaceTravelIdentityUser SpaceTravelIdentityUser { get; set; }
+        public string SpaceTravelIdentityUserId { get; set; }
+
     }
 }

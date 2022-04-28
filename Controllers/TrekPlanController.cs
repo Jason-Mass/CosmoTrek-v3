@@ -23,7 +23,8 @@ namespace CosmoTrek_v3.Controllers
         // GET: TrekPlan
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TrekPlans.ToListAsync());
+            var applicationDbContext = _context.TrekPlans.Include(t => t.SpaceTravelIdentityUser);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: TrekPlan/Details/5
@@ -35,6 +36,7 @@ namespace CosmoTrek_v3.Controllers
             }
 
             var trekPlan = await _context.TrekPlans
+                .Include(t => t.SpaceTravelIdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (trekPlan == null)
             {
@@ -47,6 +49,7 @@ namespace CosmoTrek_v3.Controllers
         // GET: TrekPlan/Create
         public IActionResult Create()
         {
+            ViewData["SpaceTravelIdentityUserId"] = new SelectList(_context.Set<SpaceTravelIdentityUser>(), "Id", "Id");
             return View();
         }
 
@@ -55,7 +58,7 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode,Distance,Duration,Cost")] TrekPlan trekPlan)
+        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode,Distance,Duration,Cost,SpaceTravelIdentityUserId")] TrekPlan trekPlan)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +66,7 @@ namespace CosmoTrek_v3.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SpaceTravelIdentityUserId"] = new SelectList(_context.Set<SpaceTravelIdentityUser>(), "Id", "Id", trekPlan.SpaceTravelIdentityUserId);
             return View(trekPlan);
         }
 
@@ -79,6 +83,7 @@ namespace CosmoTrek_v3.Controllers
             {
                 return NotFound();
             }
+            ViewData["SpaceTravelIdentityUserId"] = new SelectList(_context.Set<SpaceTravelIdentityUser>(), "Id", "Id", trekPlan.SpaceTravelIdentityUserId);
             return View(trekPlan);
         }
 
@@ -87,7 +92,7 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Destination,RocketType,LaunchDate,Mode,Distance,Duration,Cost")] TrekPlan trekPlan)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Destination,RocketType,LaunchDate,Mode,Distance,Duration,Cost,SpaceTravelIdentityUserId")] TrekPlan trekPlan)
         {
             if (id != trekPlan.Id)
             {
@@ -114,6 +119,7 @@ namespace CosmoTrek_v3.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SpaceTravelIdentityUserId"] = new SelectList(_context.Set<SpaceTravelIdentityUser>(), "Id", "Id", trekPlan.SpaceTravelIdentityUserId);
             return View(trekPlan);
         }
 
@@ -126,6 +132,7 @@ namespace CosmoTrek_v3.Controllers
             }
 
             var trekPlan = await _context.TrekPlans
+                .Include(t => t.SpaceTravelIdentityUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (trekPlan == null)
             {

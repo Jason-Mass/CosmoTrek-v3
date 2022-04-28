@@ -34,6 +34,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Cost)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpaceTravelIdentityUser)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -60,6 +63,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpaceTravelIdentityUser.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

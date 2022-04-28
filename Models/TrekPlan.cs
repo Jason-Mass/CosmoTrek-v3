@@ -15,5 +15,8 @@ namespace CosmoTrek_v3.Models
         public int Distance { get; set; }
         public int Duration { get; set; }
         public float Cost { get; set; }
+
+        public SpaceTravelIdentityUser SpaceTravelIdentityUser { get; set; }
+        public string SpaceTravelIdentityUserId { get; set; }
     }
 }

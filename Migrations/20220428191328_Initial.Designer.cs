@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CosmoTrek_v3.Data.Migrations
+namespace CosmoTrek_v3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220422204250_ModelsAdded")]
-    partial class ModelsAdded
+    [Migration("20220428191328_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,7 +57,13 @@ namespace CosmoTrek_v3.Data.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
 
+                    b.Property<string>("SpaceTravelIdentityUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SpaceTravelIdentityUserId");
 
                     b.ToTable("TrekPlans");
                 });
@@ -75,15 +81,7 @@ namespace CosmoTrek_v3.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SpaceTravelUserId")
+                    b.Property<string>("SpaceTravelIdentityUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -102,17 +100,13 @@ namespace CosmoTrek_v3.Data.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
-                    b.Property<int>("TrekPlanId")
-                        .HasColumnType("int");
-
                     b.Property<short>("Zip")
                         .HasColumnType("smallint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpaceTravelUserId");
-
-                    b.HasIndex("TrekPlanId");
+                    b.HasIndex("SpaceTravelIdentityUserId")
+                        .IsUnique();
 
                     b.ToTable("TrekReservations");
                 });
@@ -332,23 +326,26 @@ namespace CosmoTrek_v3.Data.Migrations
                     b.HasDiscriminator().HasValue("SpaceTravelIdentityUser");
                 });
 
+            modelBuilder.Entity("CosmoTrek_v3.Models.TrekPlan", b =>
+                {
+                    b.HasOne("CosmoTrek_v3.Models.SpaceTravelIdentityUser", "SpaceTravelIdentityUser")
+                        .WithMany("TrekPlan")
+                        .HasForeignKey("SpaceTravelIdentityUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SpaceTravelIdentityUser");
+                });
+
             modelBuilder.Entity("CosmoTrek_v3.Models.TrekReservation", b =>
                 {
-                    b.HasOne("CosmoTrek_v3.Models.SpaceTravelIdentityUser", "SpaceTravelUser")
-                        .WithMany("TrekReservations")
-                        .HasForeignKey("SpaceTravelUserId")
+                    b.HasOne("CosmoTrek_v3.Models.SpaceTravelIdentityUser", "SpaceTravelIdentityUser")
+                        .WithOne("TrekReservation")
+                        .HasForeignKey("CosmoTrek_v3.Models.TrekReservation", "SpaceTravelIdentityUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CosmoTrek_v3.Models.TrekPlan", "TrekPlan")
-                        .WithMany()
-                        .HasForeignKey("TrekPlanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SpaceTravelUser");
-
-                    b.Navigation("TrekPlan");
+                    b.Navigation("SpaceTravelIdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -404,7 +401,10 @@ namespace CosmoTrek_v3.Data.Migrations
 
             modelBuilder.Entity("CosmoTrek_v3.Models.SpaceTravelIdentityUser", b =>
                 {
-                    b.Navigation("TrekReservations");
+                    b.Navigation("TrekPlan");
+
+                    b.Navigation("TrekReservation")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -29,16 +29,7 @@
                 @Html.DisplayNameFor(model => model.Zip)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SpaceTravelUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TrekPlan)
+                @Html.DisplayNameFor(model => model.SpaceTravelIdentityUser)
             </th>
             <th></th>
         </tr>
@@ -62,16 +53,7 @@
                 @Html.DisplayFor(modelItem => item.Zip)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpaceTravelUser.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrekPlan.Id)
+                @Html.DisplayFor(modelItem => item.SpaceTravelIdentityUser.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
