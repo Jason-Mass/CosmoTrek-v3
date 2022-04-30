@@ -14,7 +14,8 @@ namespace CosmoTrek_v3.Models
         public string City { get; set; }
         [MaxLength(2)]
         public string State { get; set; }
-        public short Zip { get; set; }
+        [MaxLength(5)]
+        public int Zip { get; set; }
 
         public SpaceTravelIdentityUser SpaceTravelIdentityUser { get; set; }
         public string SpaceTravelIdentityUserId { get; set; }

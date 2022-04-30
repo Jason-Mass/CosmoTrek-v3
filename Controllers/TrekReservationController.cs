@@ -8,39 +8,55 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CosmoTrek_v3.Data;
 using CosmoTrek_v3.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CosmoTrek_v3.Controllers
 {
     public class TrekReservationController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<SpaceTravelIdentityUser> _userManager;
 
-        public TrekReservationController(ApplicationDbContext context)
+
+        public TrekReservationController(ApplicationDbContext context, UserManager<SpaceTravelIdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: TrekReservation
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.TrekReservations.Include(t => t.SpaceTravelIdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId =  _userManager.GetUserId(User);
+            if (userId == null)
+            {
+                return Redirect("Identity/Account/Login");
+            }
+            var trekReservation = await _context.TrekReservations.Include(t => t.SpaceTravelIdentityUser)
+                .Where(tr => tr.SpaceTravelIdentityUserId == userId).FirstOrDefaultAsync();
+            if (trekReservation == null)
+            {
+                return View("Create");
+            }
+            return View("Details", trekReservation);
         }
 
         // GET: TrekReservation/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var userId = _userManager.GetUserId(User);
 
             var trekReservation = await _context.TrekReservations
                 .Include(t => t.SpaceTravelIdentityUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.SpaceTravelIdentityUserId == userId);
             if (trekReservation == null)
             {
-                return NotFound();
+                //Create a placeholder resevation here, instead of throwing an error.
+                _context.TrekReservations.Add(new TrekReservation()
+                {
+                    SpaceTravelIdentityUserId = userId,
+                });
+                _context.SaveChanges();
             }
 
             return View(trekReservation);
@@ -73,6 +89,9 @@ namespace CosmoTrek_v3.Controllers
         // GET: TrekReservation/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            //Figure out which resevation to edit based on the current logged in user.
+
+
             if (id == null)
             {
                 return NotFound();

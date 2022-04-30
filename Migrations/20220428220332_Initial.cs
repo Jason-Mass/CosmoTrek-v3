@@ -28,7 +28,6 @@ namespace CosmoTrek_v3.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -165,9 +164,6 @@ namespace CosmoTrek_v3.Migrations
                     RocketType = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     LaunchDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Mode = table.Column<bool>(type: "bit", nullable: false),
-                    Distance = table.Column<int>(type: "int", nullable: false),
-                    Duration = table.Column<int>(type: "int", nullable: false),
-                    Cost = table.Column<float>(type: "real", nullable: false),
                     SpaceTravelIdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -191,7 +187,7 @@ namespace CosmoTrek_v3.Migrations
                     Street = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     City = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     State = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
-                    Zip = table.Column<short>(type: "smallint", nullable: false),
+                    Zip = table.Column<int>(type: "int", maxLength: 5, nullable: false),
                     SpaceTravelIdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>

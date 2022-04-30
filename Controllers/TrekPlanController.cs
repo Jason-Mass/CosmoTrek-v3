@@ -58,7 +58,7 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode,Distance,Duration,Cost,SpaceTravelIdentityUserId")] TrekPlan trekPlan)
+        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode,SpaceTravelIdentityUserId")] TrekPlan trekPlan)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Destination,RocketType,LaunchDate,Mode,Distance,Duration,Cost,SpaceTravelIdentityUserId")] TrekPlan trekPlan)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Destination,RocketType,LaunchDate,Mode,SpaceTravelIdentityUserId")] TrekPlan trekPlan)
         {
             if (id != trekPlan.Id)
             {

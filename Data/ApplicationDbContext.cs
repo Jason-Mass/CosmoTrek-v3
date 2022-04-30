@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CosmoTrek_v3.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<SpaceTravelIdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
