@@ -6,8 +6,10 @@ namespace CosmoTrek_v3.Models
     {
         [Key]
         public int Id { get; set; }
-        [MaxLength(60)]
-        public string TravelerName { get; set; }
+        [MaxLength(20)]
+        public string FirstName { get; set; }
+        [MaxLength(20)]
+        public string LastName { get; set; }
         [MaxLength(50)]
         public string Street { get; set; }
         [MaxLength(30)]
@@ -15,7 +17,8 @@ namespace CosmoTrek_v3.Models
         [MaxLength(2)]
         public string State { get; set; }
         [MaxLength(5)]
-        public int Zip { get; set; }
+        [MinLength(5)]
+        public string Zip { get; set; }
 
         public SpaceTravelIdentityUser SpaceTravelIdentityUser { get; set; }
         public string SpaceTravelIdentityUserId { get; set; }

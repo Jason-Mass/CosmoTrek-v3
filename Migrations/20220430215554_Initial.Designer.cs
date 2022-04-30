@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CosmoTrek_v3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220428220332_Initial")]
+    [Migration("20220430215554_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,6 +137,16 @@ namespace CosmoTrek_v3.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("SpaceTravelIdentityUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -151,14 +161,10 @@ namespace CosmoTrek_v3.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("TravelerName")
+                    b.Property<string>("Zip")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
-
-                    b.Property<int>("Zip")
                         .HasMaxLength(5)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(5)");
 
                     b.HasKey("Id");
 

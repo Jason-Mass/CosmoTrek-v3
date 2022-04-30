@@ -36,9 +36,9 @@ namespace CosmoTrek_v3.Controllers
                 .Where(tr => tr.SpaceTravelIdentityUserId == userId).FirstOrDefaultAsync();
             if (trekReservation == null)
             {
-                return View("Create");
+                return RedirectToAction("Create");
             }
-            return View("Details", trekReservation);
+            return View("Index", trekReservation);
         }
 
         // GET: TrekReservation/Details/5
@@ -74,13 +74,14 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TravelerName,Street,City,State,Zip,SpaceTravelIdentityUserId")] TrekReservation trekReservation)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Street,City,State,Zip,SpaceTravelIdentityUserId")] TrekReservation trekReservation)
         {
+            trekReservation.SpaceTravelIdentityUserId = _userManager.GetUserId(User);
             if (ModelState.IsValid)
             {
                 _context.Add(trekReservation);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View("Details", trekReservation);
             }
             ViewData["SpaceTravelIdentityUserId"] = new SelectList(_context.Set<SpaceTravelIdentityUser>(), "Id", "Id", trekReservation.SpaceTravelIdentityUserId);
             return View(trekReservation);
@@ -111,7 +112,7 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,TravelerName,Street,City,State,Zip,SpaceTravelIdentityUserId")] TrekReservation trekReservation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Street,City,State,Zip,SpaceTravelIdentityUserId")] TrekReservation trekReservation)
         {
             if (id != trekReservation.Id)
             {
