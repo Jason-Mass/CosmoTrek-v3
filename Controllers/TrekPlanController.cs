@@ -8,23 +8,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CosmoTrek_v3.Data;
 using CosmoTrek_v3.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CosmoTrek_v3.Controllers
 {
     public class TrekPlanController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<SpaceTravelIdentityUser> _userManager;
 
-        public TrekPlanController(ApplicationDbContext context)
+        public TrekPlanController(ApplicationDbContext context, UserManager<SpaceTravelIdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: TrekPlan
         public async Task<IActionResult> Index()
         {
+            var userId = _userManager.GetUserId(User);
             var applicationDbContext = _context.TrekPlans.Include(t => t.SpaceTravelIdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var UserPlans = await _context.TrekPlans.Include(t => t.SpaceTravelIdentityUser)
+               .Where(tr => tr.SpaceTravelIdentityUserId == userId).ToListAsync();
+            return View(UserPlans);
         }
 
         // GET: TrekPlan/Details/5
