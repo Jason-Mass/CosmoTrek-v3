@@ -1,4 +1,4 @@
-﻿using CosmoTrek_v3.Models;
+using CosmoTrek_v3.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -17,7 +17,18 @@ namespace CosmoTrek_v3.Controllers
         {
             return View();
         }
-
+        public IActionResult Destinations()
+        {
+            return View();
+        }
+        public IActionResult Propulsion()
+        {
+            return View();
+        }
+        public IActionResult Companies()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

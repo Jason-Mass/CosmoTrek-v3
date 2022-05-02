@@ -1,3 +1,18 @@
+
+@font-face {
+    src: url(/fonts/NasaDings.ttf);
+    font-family: NASA;
+}
+@font-face {
+    src: url(/fonts/Starcruiser.ttf);
+    font-family: Starcruiser;
+}
+
+@font-face {
+    src: url(/fonts/Cosmos.ttf);
+    font-family: Cosmos;
+}
+
 html {
   font-size: 14px;
 }
@@ -14,5 +29,160 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: #000000;
+    font: 15px Verdana;
+    color: #ffffff;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    max-width: 800px;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    font: 60px;
+    font-family: Cosmos;
+    margin: 3px;
+}
+
+h2 {
+    color: #0000EE;
+    font: bold 20px Verdana;
+    text-align: center;
+}
+
+h3 {
+    color: #ff0000;
+    font: bold 27px Verdana;
+    text-align: center;
+}
+
+h4 {
+    color: #ffffff;
+    font: bold 25px Verdana;
+}
+
+.center {
+    text-align: center;
+    
+}
+.navbar-brand {
+    font: bold 20px NASA;
+}
+.banner {
+    width: 800px;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    color: #ff0000;
+    font: bold 30px Verdana;
+    text-align: center;
+    background-color: #ffffff;
+    border: 3px solid #ff0000;
+    border-radius: 20px;
+}
+
+    .banner:hover {
+        border: 3px dashed #ff0000;
+    }
+
+.logo {
+    margin-top: 75px;
+    margin-bottom: 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    border: 4px solid #0000EE;
+    border-radius: 20px;
+}
+    .logo:hover {
+        border: 4px dashed #0000EE;
+    }
+
+.pic {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    border: 3px solid #ffffff;
+    border-radius: 20px;
+}
+
+.rocketman {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    border: 10px double #ffffff;
+    border-color: #ff0000;
+    border-radius: 30%;
+}
+
+.note1 {
+    color: #ff0000;
+    text-align: center;
+    font: italic 15px Verdana;
+}
+
+.note2 {
+    color: #ffffff;
+    font: italic 15px Verdana;
+}
+
+.note3 {
+    color: #0000EE;
+    text-align: center;
+    font: bold 15px Verdana;
+}
+
+.note4 {
+    color: #ff0000;
+    font: italic 15px Verdana;
+    text-indent: 5em;
+}
+
+#destList {
+    font: 20px Verdana;
+    color: #ffffff;
+    list-style-type: square;
+    list-style-position: inside;
+    text-indent: 12em;
+}
+
+#warpList {
+    font: 15px Verdana;
+    color: #ffffff;
+    list-style-type: square;
+    list-style-position: inside;
+    /*text-indent: 10em;*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+#Galactic{
+    width: 40px;
+}
+
+#Astra{
+    width: 150px;
 }
