@@ -1,8 +1,8 @@
-using CosmoTrek.Models;
+using CosmoTrek_v3.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace CosmoTrek.Controllers
+namespace CosmoTrek_v3.Controllers
 {
     public class HomeController : Controller
     {
