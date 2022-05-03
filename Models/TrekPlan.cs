@@ -12,8 +12,8 @@ namespace CosmoTrek_v3.Models
         public string RocketType { get; set; }
         public DateTime LaunchDate { get; set; }
         public bool Mode { get; set; }
-        public int Distance { get; set; }
-        public int Duration { get; set; }
-        public float Cost { get; set; }
+
+        public SpaceTravelIdentityUser SpaceTravelIdentityUser { get; set; }
+        public string SpaceTravelIdentityUserId { get; set; }
     }
 }

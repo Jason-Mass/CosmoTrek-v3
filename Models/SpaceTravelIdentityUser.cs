@@ -5,7 +5,7 @@ namespace CosmoTrek_v3.Models
 {
     public class SpaceTravelIdentityUser : IdentityUser
     {
-        public List<TrekReservation> TrekReservations { get; set; } // one user to many TrekReservations
-
+        public TrekReservation TrekReservation { get; set; }
+        public List<TrekPlan> TrekPlans { get; set; }
     }
 }
