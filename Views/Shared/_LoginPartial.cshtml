@@ -2,7 +2,7 @@
 @inject SignInManager<SpaceTravelIdentityUser> SignInManager
 @inject UserManager<SpaceTravelIdentityUser> UserManager
 
-<ul class="navbar-nav">
+<ul class="navbar-nav align-items-baseline">
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
