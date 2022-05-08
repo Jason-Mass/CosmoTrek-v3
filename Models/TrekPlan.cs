@@ -14,11 +14,19 @@ namespace CosmoTrek_v3.Models
 
         public SpaceTravelIdentityUser SpaceTravelIdentityUser { get; set; }
         public string SpaceTravelIdentityUserId { get; set; }
+
     }
 
-    public enum RocketShips
+    public static class TrekPlanMisc
     {
-        Antares, Ariane5, AstraRocket3, Ceres1, DreamChaser, Electron, Falcon9, FalconHeavy, Hyperbola1, LauncherOne, NewShepard, Soyuz2, Spica, Vega, VSSUnity
+        public static string[] RocketShips = new string[]
+        {
+            "Antares", "Ariane 5", "Astra Rocket 3", "Ceres-1", "Dream Chaser", "Electron", "Falcon 9", "Falcon Heavy", "Hyperbola 1", "Launcher One", "New Shepard", "Soyuz-2", "Spica", "Vega", "VSS Unity"
+        };
+
+        public static string[] PropulsionModes = new string[] { "Conventional", "Warp Drive (Lightspeed)" };
     }
+
+
 
 }
