@@ -1,4 +1,4 @@
-﻿@model CosmoTrek_v3.Models.TrekPlanCreateViewModel
+﻿@model CosmoTrek_v3.Models.TrekPlanViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -59,13 +59,6 @@
                 <input asp-for="LaunchDate" class="form-control" type="date" />
                 <span asp-validation-for="LaunchDate" class="text-danger"></span>
             </div>
-            @*
-                <div class="form-group">
-                <label asp-for="SpaceTravelIdentityUserId" class="control-label"></label>
-                <select asp-for="SpaceTravelIdentityUserId" class ="form-control" asp-items="ViewBag.SpaceTravelIdentityUserId"></select>
-                </div>
-            *@
-
             <div class="form-group mt-3 mb-2">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

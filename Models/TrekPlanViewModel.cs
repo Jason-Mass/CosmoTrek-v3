@@ -2,7 +2,7 @@
 
 namespace CosmoTrek_v3.Models
 {
-    public class TrekPlanCreateViewModel
+    public class TrekPlanViewModel
     {
         [Key]
         public int Id { get; set; }

@@ -68,7 +68,7 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode")] TrekPlanCreateViewModel trekPlan)
+        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode")] TrekPlan trekPlan)
         {
             trekPlan.SpaceTravelIdentityUserId = _userManager.GetUserId(User);
 
@@ -102,8 +102,16 @@ namespace CosmoTrek_v3.Controllers
             {
                 return NotFound();
             }
+            var trekPlanEditView = new TrekPlanViewModel();
+            trekPlanEditView.Id = trekPlan.Id;
+            trekPlanEditView.Destination = trekPlan.Destination;
+            trekPlanEditView.RocketType = trekPlan.RocketType;
+            trekPlanEditView.LaunchDate = trekPlan.LaunchDate;
+            trekPlanEditView.Mode = trekPlan.Mode;
+            trekPlanEditView.SpaceTravelIdentityUserId = trekPlan.SpaceTravelIdentityUserId;
+            
             ViewData["SpaceTravelIdentityUserId"] = new SelectList(_context.Set<SpaceTravelIdentityUser>(), "Id", "Id", trekPlan.SpaceTravelIdentityUserId);
-            return View(trekPlan);
+            return View(trekPlanEditView);
         }
 
         // POST: TrekPlan/Edit/5
@@ -111,17 +119,25 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Destination,RocketType,LaunchDate,Mode,SpaceTravelIdentityUserId")] TrekPlan trekPlan)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Destination,RocketType,LaunchDate,Mode")] TrekPlanViewModel trekPlan)
         {
             if (id != trekPlan.Id)
             {
                 return NotFound();
             }
 
+            trekPlan.SpaceTravelIdentityUserId = _userManager.GetUserId(User);
             if (ModelState.IsValid)
             {
                 try
                 {
+                    TrekPlan databaseTrekPlan = new TrekPlan();
+                    databaseTrekPlan.Id = trekPlan.Id;
+                    databaseTrekPlan.Destination = trekPlan.Destination;
+                    databaseTrekPlan.RocketType = trekPlan.RocketType;
+                    databaseTrekPlan.LaunchDate = trekPlan.LaunchDate;
+                    databaseTrekPlan.Mode = trekPlan.Mode;
+                    databaseTrekPlan.SpaceTravelIdentityUserId = trekPlan.SpaceTravelIdentityUserId;
                     _context.Update(trekPlan);
                     await _context.SaveChangesAsync();
                 }
