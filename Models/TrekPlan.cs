@@ -10,7 +10,7 @@ namespace CosmoTrek_v3.Models
         public string Destination { get; set; }
         public int RocketType { get; set; }
         public DateTime LaunchDate { get; set; }
-        public bool Mode { get; set; }
+        public bool Mode { get; set; } // false is conventional propulsion
 
         public SpaceTravelIdentityUser SpaceTravelIdentityUser { get; set; }
         public string SpaceTravelIdentityUserId { get; set; }
