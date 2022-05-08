@@ -106,10 +106,8 @@ namespace CosmoTrek_v3.Migrations
                     b.Property<bool>("Mode")
                         .HasColumnType("bit");
 
-                    b.Property<string>("RocketType")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                    b.Property<int>("RocketType")
+                        .HasColumnType("int");
 
                     b.Property<string>("SpaceTravelIdentityUserId")
                         .IsRequired()

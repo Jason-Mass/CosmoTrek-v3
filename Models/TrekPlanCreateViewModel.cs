@@ -2,7 +2,7 @@
 
 namespace CosmoTrek_v3.Models
 {
-    public class TrekPlan
+    public class TrekPlanCreateViewModel
     {
         [Key]
         public int Id { get; set; }
@@ -11,14 +11,6 @@ namespace CosmoTrek_v3.Models
         public int RocketType { get; set; }
         public DateTime LaunchDate { get; set; }
         public bool Mode { get; set; }
-
-        public SpaceTravelIdentityUser SpaceTravelIdentityUser { get; set; }
         public string SpaceTravelIdentityUserId { get; set; }
     }
-
-    public enum RocketShips
-    {
-        Antares, Ariane5, AstraRocket3, Ceres1, DreamChaser, Electron, Falcon9, FalconHeavy, Hyperbola1, LauncherOne, NewShepard, Soyuz2, Spica, Vega, VSSUnity
-    }
-
 }

@@ -161,7 +161,7 @@ namespace CosmoTrek_v3.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Destination = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    RocketType = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    RocketType = table.Column<int>(type: "int", nullable: false),
                     LaunchDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Mode = table.Column<bool>(type: "bit", nullable: false),
                     SpaceTravelIdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)

@@ -1,4 +1,4 @@
-﻿@model CosmoTrek_v3.Models.TrekPlan
+﻿@model CosmoTrek_v3.Models.TrekPlanCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -26,7 +26,22 @@
             <div class="form-group my-2">
                 <label asp-for="RocketType" class="control-label">Rocket Type</label>
                 <select asp-for="Destination" class="form-control">
-                    <option value=""></option>
+                    <option value="">Select</option>
+                    <option value="1">Antares</option>
+                    <option value="2">Ariane 5</option>
+                    <option value="3">Astra Rocket 3</option>
+                    <option value="4">Ceres-1</option>
+                    <option value="5">Dream Chaser</option>
+                    <option value="6">Electron</option>
+                    <option value="7">Falcon 9</option>
+                    <option value="8">Falcon Heavy</option>
+                    <option value="9">Hyperbola-1</option>
+                    <option value="10">LauncherOne</option>
+                    <option value="11">New Shepard</option>
+                    <option value="12">Soyuz-2</option>
+                    <option value="13">Spica</option>
+                    <option value="14">Vega</option>
+                    <option value="15">VSS Unity</option>
                 </select>
                 <span asp-validation-for="RocketType" class="text-danger"></span>
             </div>
@@ -40,7 +55,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="LaunchDate" class="control-label"></label>
+                <label asp-for="LaunchDate" class="control-label">Launch Date</label>
                 <input asp-for="LaunchDate" class="form-control" />
                 <span asp-validation-for="LaunchDate" class="text-danger"></span>
             </div>

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CosmoTrek_v3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220430215554_Initial")]
+    [Migration("20220508022614_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,10 +108,8 @@ namespace CosmoTrek_v3.Migrations
                     b.Property<bool>("Mode")
                         .HasColumnType("bit");
 
-                    b.Property<string>("RocketType")
-                        .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                    b.Property<int>("RocketType")
+                        .HasColumnType("int");
 
                     b.Property<string>("SpaceTravelIdentityUserId")
                         .IsRequired()
