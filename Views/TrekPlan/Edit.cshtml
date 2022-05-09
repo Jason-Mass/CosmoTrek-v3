@@ -1,4 +1,4 @@
-﻿@model CosmoTrek_v3.Models.TrekPlan
+﻿@model CosmoTrek_v3.Models.TrekPlanViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -7,40 +7,60 @@
 
 <h1>Edit</h1>
 
-<h4>TrekPlan</h4>
+<h4>Trek Plan</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
+            <div class="form-group my-2">
                 <label asp-for="Destination" class="control-label"></label>
-                <input asp-for="Destination" class="form-control" />
+                <select asp-for="Destination" class="form-control">
+                    <option value="">Select</option>
+                    <option value="Earth's Moon">Earth's Moon</option>
+                    <option value="Mars">Mars</option>
+                    <option value="Venus">Venus</option>
+                </select>
                 <span asp-validation-for="Destination" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="RocketType" class="control-label"></label>
-                <input asp-for="RocketType" class="form-control" />
+            <div class="form-group my-2">
+                <label asp-for="RocketType" class="control-label">Rocket Type</label>
+                <select asp-for="RocketType" class="form-control">
+                    <option value="">Select</option>
+                    <option value="0">Antares</option>
+                    <option value="1">Ariane 5</option>
+                    <option value="2">Astra Rocket 3</option>
+                    <option value="3">Ceres-1</option>
+                    <option value="4">Dream Chaser</option>
+                    <option value="5">Electron</option>
+                    <option value="6">Falcon 9</option>
+                    <option value="7">Falcon Heavy</option>
+                    <option value="8">Hyperbola-1</option>
+                    <option value="9">LauncherOne</option>
+                    <option value="10">New Shepard</option>
+                    <option value="11">Soyuz-2</option>
+                    <option value="12">Spica</option>
+                    <option value="13">Vega</option>
+                    <option value="14">VSS Unity</option>
+                </select>
                 <span asp-validation-for="RocketType" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="LaunchDate" class="control-label"></label>
-                <input asp-for="LaunchDate" class="form-control" />
-                <span asp-validation-for="LaunchDate" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Mode" /> @Html.DisplayNameFor(model => model.Mode)
+            <div class="form-group my-2">
+                <label class="control-label">
+                    <label asp-for="Mode" class="control-label">Mode of Propulsion</label>
+                    <select asp-for="Mode" class="select form-control">
+                        <option value="false">Conventional</option>
+                        <option value="true">Warp Drive (Lightspeed)</option>
+                    </select>
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="SpaceTravelIdentityUserId" class="control-label"></label>
-                <select asp-for="SpaceTravelIdentityUserId" class="form-control" asp-items="ViewBag.SpaceTravelIdentityUserId"></select>
-                <span asp-validation-for="SpaceTravelIdentityUserId" class="text-danger"></span>
+                <label asp-for="LaunchDate" class="control-label">Launch Date</label>
+                <input asp-for="LaunchDate" class="form-control" type="date" />
+                <span asp-validation-for="LaunchDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary mt-2" />
+            <div class="form-group mt-3 mb-2">
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         </form>
     </div>

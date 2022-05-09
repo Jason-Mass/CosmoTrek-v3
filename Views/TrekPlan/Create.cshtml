@@ -1,5 +1,4 @@
 ﻿@model CosmoTrek_v3.Models.TrekPlan
-
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,7 +16,7 @@
                 <label asp-for="Destination" class="control-label"></label>
                 <select asp-for="Destination" class="form-control">
                     <option value="">Select</option>
-                    <option value="Moon">Earth's Moon</option>
+                    <option value="Earth's Moon">Earth's Moon</option>
                     <option value="Mars">Mars</option>
                     <option value="Venus">Venus</option>
                 </select>
@@ -25,8 +24,23 @@
             </div>
             <div class="form-group my-2">
                 <label asp-for="RocketType" class="control-label">Rocket Type</label>
-                <select asp-for="Destination" class="form-control">
-                    <option value=""></option>
+                <select asp-for="RocketType" class="form-control">
+                    <option value="">Select</option>
+                    <option value="0">Antares</option>
+                    <option value="1">Ariane 5</option>
+                    <option value="2">Astra Rocket 3</option>
+                    <option value="3">Ceres-1</option>
+                    <option value="4">Dream Chaser</option>
+                    <option value="5">Electron</option>
+                    <option value="6">Falcon 9</option>
+                    <option value="7">Falcon Heavy</option>
+                    <option value="8">Hyperbola-1</option>
+                    <option value="9">LauncherOne</option>
+                    <option value="10">New Shepard</option>
+                    <option value="11">Soyuz-2</option>
+                    <option value="12">Spica</option>
+                    <option value="13">Vega</option>
+                    <option value="14">VSS Unity</option>
                 </select>
                 <span asp-validation-for="RocketType" class="text-danger"></span>
             </div>
@@ -40,27 +54,44 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="LaunchDate" class="control-label"></label>
-                <input asp-for="LaunchDate" class="form-control" />
+                <label asp-for="LaunchDate" class="control-label">Launch Date</label>
+                <input asp-for="LaunchDate" class="form-control" type="date" />
                 <span asp-validation-for="LaunchDate" class="text-danger"></span>
             </div>
-            @*
-                <div class="form-group">
-                <label asp-for="SpaceTravelIdentityUserId" class="control-label"></label>
-                <select asp-for="SpaceTravelIdentityUserId" class ="form-control" asp-items="ViewBag.SpaceTravelIdentityUserId"></select>
-                </div>
-            *@
-
             <div class="form-group mt-3 mb-2">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+    </div>
+    <div class="col-md-8" id="RocketPreview">
     </div>
 </div>
 
 <div>
     <a asp-action="Index">Back to My Trek Plans</a>
 </div>
+
+<script type="text/javascript">
+    var RocketSelection = document.getElementById('RocketType')
+
+    RocketSelection.addEventListener('change', e=>{
+
+    })
+
+
+        $('#RocketType').on('change', function(evt) {
+        Alert("penis")
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        var $detailDiv = $('#RocketPreview'),
+            url = $(this).data('url');
+
+        $.get(url, function(data) {
+            $detailDiv.replaceWith(data);
+        });
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

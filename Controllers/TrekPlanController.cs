@@ -27,6 +27,10 @@ namespace CosmoTrek_v3.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
+            if (userId == null)
+            {
+                return Redirect("/Identity/Account/Login");
+            }
             var applicationDbContext = _context.TrekPlans.Include(t => t.SpaceTravelIdentityUser);
             var UserPlans = await _context.TrekPlans.Include(t => t.SpaceTravelIdentityUser)
                .Where(tr => tr.SpaceTravelIdentityUserId == userId).ToListAsync();
@@ -64,11 +68,20 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode,SpaceTravelIdentityUserId")] TrekPlan trekPlan)
+        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode")] TrekPlanViewModel trekPlan)
         {
+            trekPlan.SpaceTravelIdentityUserId = _userManager.GetUserId(User);
+
             if (ModelState.IsValid)
             {
-                _context.Add(trekPlan);
+                TrekPlan _trekPlan = new TrekPlan();
+                _trekPlan.Id = trekPlan.Id;
+                _trekPlan.Destination = trekPlan.Destination;
+                _trekPlan.RocketType = trekPlan.RocketType;
+                _trekPlan.LaunchDate = trekPlan.LaunchDate;
+                _trekPlan.Mode = trekPlan.Mode;
+                _trekPlan.SpaceTravelIdentityUserId = trekPlan.SpaceTravelIdentityUserId;
+                _context.Add(_trekPlan);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -89,8 +102,16 @@ namespace CosmoTrek_v3.Controllers
             {
                 return NotFound();
             }
+            var trekPlanEditView = new TrekPlanViewModel();
+            trekPlanEditView.Id = trekPlan.Id;
+            trekPlanEditView.Destination = trekPlan.Destination;
+            trekPlanEditView.RocketType = trekPlan.RocketType;
+            trekPlanEditView.LaunchDate = trekPlan.LaunchDate;
+            trekPlanEditView.Mode = trekPlan.Mode;
+            trekPlanEditView.SpaceTravelIdentityUserId = trekPlan.SpaceTravelIdentityUserId;
+            
             ViewData["SpaceTravelIdentityUserId"] = new SelectList(_context.Set<SpaceTravelIdentityUser>(), "Id", "Id", trekPlan.SpaceTravelIdentityUserId);
-            return View(trekPlan);
+            return View(trekPlanEditView);
         }
 
         // POST: TrekPlan/Edit/5
@@ -98,18 +119,26 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Destination,RocketType,LaunchDate,Mode,SpaceTravelIdentityUserId")] TrekPlan trekPlan)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Destination,RocketType,LaunchDate,Mode")] TrekPlanViewModel trekPlan)
         {
             if (id != trekPlan.Id)
             {
                 return NotFound();
             }
 
+            trekPlan.SpaceTravelIdentityUserId = _userManager.GetUserId(User);
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(trekPlan);
+                    TrekPlan databaseTrekPlan = new TrekPlan();
+                    databaseTrekPlan.Id = trekPlan.Id;
+                    databaseTrekPlan.Destination = trekPlan.Destination;
+                    databaseTrekPlan.RocketType = trekPlan.RocketType;
+                    databaseTrekPlan.LaunchDate = trekPlan.LaunchDate;
+                    databaseTrekPlan.Mode = trekPlan.Mode;
+                    databaseTrekPlan.SpaceTravelIdentityUserId = trekPlan.SpaceTravelIdentityUserId;
+                    _context.Update(databaseTrekPlan);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
