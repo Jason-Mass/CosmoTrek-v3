@@ -1,66 +1,44 @@
-﻿@model CosmoTrek_v3.Models.TrekPlan
+﻿@using System.Data
+@using LumenWorks.Framework.IO.Csv
+@model CosmoTrek_v3.Models.TrekPlan
+@using static CosmoTrek_v3.Models.TrekPlanMisc
+@using static CosmoTrek_v3.Models.RocketInfo
 
 @{
     ViewData["Title"] = "Trip Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var thisRecord = GetRocket(Model.RocketType);
 }
+<h1>Trip Details</h1>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <image id="rocketImage" src=""
+        <div class="col-md-6">
+            <img class="img-fluid" src="~/js/@(Model.RocketType).jpg" />
         </div>
-        <div class="col-md-3">
-
+        <div class="col-md-2 py-3 border border-light">
+            <div class="row">
+                <p class="text-primary">Rocket Type: </p><p>@TrekPlanMisc.RocketShips[Model.RocketType]</p>
+            </div>
+            <div class="row"><p class="text-primary">Company: </p><p>@thisRecord[1]</p></div>
+            <div class="row"><p class="text-primary">Country: </p><p>@thisRecord[2]</p></div>
+            <div class="row"><p class="text-primary">Launch Cost: </p><p>@thisRecord[3]</p></div>
         </div>
-        <div class="col-md-3">
-
+        <div class="col-md-2 py-3 border border-light">
+            <div class="row"><p class="text-primary">Weight: </p><p>@thisRecord[4]</p></div>
+            <div class="row"><p class="text-primary">Thrust: </p><p>@thisRecord[5]</p></div>
+            <div class="row"><p class="text-primary">W/T Ratio: </p><p>@thisRecord[6]</p></div>
+            <div class="row"><p class="text-primary">Velocity: </p><p>@thisRecord[7]</p></div>
         </div>
-        <div class="col-md-3">
-
+        <div class="col-md-2 py-3 border border-light">
+            <div class="row"><p class="text-primary">Destination: </p><p>@Model.Destination</p></div>
+            <div class="row"><p class="text-primary">Departure Date: </p><p>@Model.LaunchDate.ToString("D")</p></div>
         </div>
     </div>
 </div>
 
-<h1>Trip Details</h1>
-
-<script type="text/javascript">
-   document.getElementById('rocketImage').setAttribute("src",(Rocket))
-</script>
-
-@*
-<div>
-    <h4>Trek Plan</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Destination)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Destination)
-        </dd>
-        <dt class = "col-sm-2">
-            Rocket Type
-        </dt>
-        <dd class = "col-sm-10">
-            @TrekPlanMisc.RocketShips[Convert.ToInt32(Model.RocketType)]
-        </dd>
-        <dt class = "col-sm-2">
-            Launch Date
-        </dt>
-        <dd class = "col-sm-10">
-            @Model.LaunchDate.ToString("D")
-        </dd>
-        <dt class = "col-sm-2">
-            Mode of Propulsion
-        </dt>
-        <dd class = "col-sm-10">
-            @TrekPlanMisc.PropulsionModes[Convert.ToInt32(Model.Mode)]
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+<div class="button-primary m-2">
     <a asp-action="Index">Back to List</a>
 </div>
-*@
+
+
