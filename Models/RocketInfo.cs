@@ -76,17 +76,4 @@ namespace CosmoTrek_v3.Models
         public float Miles { get; set; }
     }
 
-    public class Ephemerides
-    {
-        Rootobject MoonEphemeride = JsonConvert.DeserializeObject<Rootobject>(moonJson);
-        Rootobject MarsEphemeride = JsonConvert.DeserializeObject<Rootobject>(marsJson);
-        Rootobject VenusEphemeride = JsonConvert.DeserializeObject<Rootobject>(venusJson);
-
-        static string moonJson = "";
-
-        static string marsJson = "";
-
-        static string venusJson = "";
-    }
-
 }
