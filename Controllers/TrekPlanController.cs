@@ -138,7 +138,7 @@ namespace CosmoTrek_v3.Controllers
                     databaseTrekPlan.LaunchDate = trekPlan.LaunchDate;
                     databaseTrekPlan.Mode = trekPlan.Mode;
                     databaseTrekPlan.SpaceTravelIdentityUserId = trekPlan.SpaceTravelIdentityUserId;
-                    _context.Update(trekPlan);
+                    _context.Update(databaseTrekPlan);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
