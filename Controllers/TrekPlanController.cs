@@ -68,7 +68,7 @@ namespace CosmoTrek_v3.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode")] TrekPlan trekPlan)
+        public async Task<IActionResult> Create([Bind("Id,Destination,RocketType,LaunchDate,Mode")] TrekPlanViewModel trekPlan)
         {
             trekPlan.SpaceTravelIdentityUserId = _userManager.GetUserId(User);
 
