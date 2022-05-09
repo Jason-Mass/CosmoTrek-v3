@@ -63,11 +63,35 @@
             </div>
         </form>
     </div>
+    <div class="col-md-8" id="RocketPreview">
+    </div>
 </div>
 
 <div>
     <a asp-action="Index">Back to My Trek Plans</a>
 </div>
+
+<script type="text/javascript">
+    var RocketSelection = document.getElementById('RocketType')
+
+    RocketSelection.addEventListener('change', e=>{
+
+    })
+
+
+        $('#RocketType').on('change', function(evt) {
+        Alert("penis")
+        evt.preventDefault();
+        evt.stopPropagation();
+
+        var $detailDiv = $('#RocketPreview'),
+            url = $(this).data('url');
+
+        $.get(url, function(data) {
+            $detailDiv.replaceWith(data);
+        });
+    });
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
